@@ -4,6 +4,7 @@ from tkinter import messagebox
 game = Tk()
 game.geometry("400x400")
 game.title("Currency Converter")
+game.config(bg="green")
 
 def convert():
     amount = entry_amount.get()
@@ -24,12 +25,13 @@ def convert():
     if (from_val,to_val) in exchange_rate:
         rate = exchange_rate[(from_val,to_val)]
         converted_amount = float(amount)*rate
-        result_label.config(text= f"{amount}{from_val} = {converted_amount:}{to_val} ")
+        result_label.config(text= f"{amount} {from_val} = {converted_amount:.2f} {to_val}")
     else:
-        messagebox.showerror("Error","Convertion rate not available")
+        messagebox.showerror("Error","Conversion rate not available")
 
-amount_label = Label(game,text="Enter an Amount:").pack()
-entry_amount = Entry(game).pack()
+amount_label = Label(game,text="Enter an Amount:",bg="black",fg="white").pack()
+entry_amount = Entry(game)
+entry_amount.pack()
 
 currencies = ["USD", "EUR", "GBP", "INR"]
 
@@ -40,7 +42,7 @@ from_var.set("EUR")
 from_menu = OptionMenu(game,from_var,*currencies)
 from_menu.pack()
 
-to_label = Label(game,text="To:")
+to_label = Label(game,text="To:",bg="purple",fg="white")
 
 to_var = StringVar(game)
 to_var.set("USD")
@@ -50,6 +52,7 @@ to_menu.pack()
 convert_btn = Button(game,text="Convert", command= convert)
 convert_btn.pack()
 
-result_label = Label(game,text="").pack()
+result_label = Label(game,text="",bg="green",fg="black")
+result_label.pack()
 
 game.mainloop()
